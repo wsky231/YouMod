@@ -113,6 +113,13 @@ jobs:
         with:
           exclude_inputs: bundle_id,display_name,youpip,ytuhd,ryd,abconfig,ytweaks,youslider,gonerino,demc,volboost,repo,branch,youquality
           
+      - name: Select Xcode 26
+        run: |
+          ls -d /Applications/Xcode*.app
+          XCODE=$(ls -d /Applications/Xcode_26*.app | sort -V | tail -1)
+          sudo xcode-select -s "$XCODE"
+          xcodebuild -version
+
       - name: Install MEGA downloader
         if: ${{ startsWith(inputs.ipa_url, 'https://mega.nz/') }}
         run: brew install megatools
